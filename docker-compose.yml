@@ -5,6 +5,14 @@ services:
     node:
         build: ./app
 
+    bbox:
+        image: arqsoft/bbox:202201.1
+        ports: 
+            - "9090:9090"
+            - "9091:9091"
+        volumes:
+            - ./bbox_config.properties:/opt/bbox/config.properties
+
     nginx:
         image: nginx:1.21.6
         ports:
