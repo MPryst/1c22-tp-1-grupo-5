@@ -7,9 +7,15 @@ app.get('/', function(req, res) {
   res.send("PING");
 });
 
+
+// Intensive endpoint: Cálculos pesados sobre los datos
 app.get('/primes', function(req, res) {
-  var allPrimes = eratosthenes_sieve(parseInt(req.query.n));
-  console.log(allPrimes)
+  var allPrimes;
+  if (req.query.n === undefined) {
+    allPrimes = eratosthenes_sieve();
+  } else {
+    allPrimes = eratosthenes_sieve(parseInt(req.query.n));
+  }
   res.send(allPrimes)
 });
 
