@@ -1,5 +1,5 @@
 // Créditos: https://www.tutorialspoint.com/using-sieve-of-eratosthenes-to-find-primes-javascript
-function eratosthenes_sieve(num=1000000) {
+function eratosthenes_sieve(num=100000){
     const numArr = new Array(num + 1);
     numArr.fill(true);
     numArr[0] = numArr[1] = false;
@@ -8,7 +8,6 @@ function eratosthenes_sieve(num=1000000) {
            numArr[i * j] = false;
        }
     }
-    console.log(numArr);
     return numArr.reduce((acc, val, ind) => {
        if(val){
           return acc.concat(ind);
