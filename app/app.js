@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const resources = require('./resources.json');
 
 // Ping endpoint: Healthcheck básico
 app.get('/', function(req, res) {
