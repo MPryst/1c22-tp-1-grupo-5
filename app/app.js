@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const { eratosthenes_sieve } = require('./intensive');
 const app = express();
 
