@@ -2,20 +2,16 @@ const express = require('express');
 const { eratosthenes_sieve } = require('./intensive');
 const app = express();
 
-// Root endpoint
-app.get("/", (req, res) => {
-  res.status(200).send("HELLO!");
-});
-
-
 // Ping endpoint: Healthcheck básico
-app.get('/ping', function(req, res) {
+app.get('/', function(req, res) {
+  console.log('PING')
   res.status(200).send("PING");
 });
 
 
 // Intensive endpoint: Cálculos pesados sobre los datos
 app.get('/primes', function(req, res) {
+  console.log('PRIMES');
   var allPrimes;
   if (req.query.n === undefined) {
     allPrimes = eratosthenes_sieve();
@@ -26,6 +22,7 @@ app.get('/primes', function(req, res) {
 });
 
 app.get("/sync", (req, res) => {
+  console.log('SYNC');
   axios.get(`http://bbox:9090/`)
       .then(result => {
           res.send(`Bbox port 9090: Status ${result.status} Data ${result.data}`);
@@ -36,6 +33,7 @@ app.get("/sync", (req, res) => {
 });
 
 app.get("/async", (req, res) => {
+  console.log('ASYNC');
   axios.get(`http://bbox:9091/`)
       .then(result => {
           res.send(`Bbox port 9091: Status ${result.status} Data ${result.data}`);

@@ -33,4 +33,4 @@ scenarios:
   - name: Primes
     flow:
       - get:
-          url: '/primes?n=100'
+          url: '/primes?n=100000'
