@@ -25,7 +25,7 @@ app.get('/primes', function(req, res) {
   res.send(allPrimes)
 });
 
-app.get("/bbox-9090", (req, res) => {
+app.get("/sync", (req, res) => {
   axios.get(`http://bbox:9090/`)
       .then(result => {
           res.send(`Bbox port 9090: Status ${result.status} Data ${result.data}`);
@@ -35,7 +35,7 @@ app.get("/bbox-9090", (req, res) => {
       });
 });
 
-app.get("/bbox-9091", (req, res) => {
+app.get("/async", (req, res) => {
   axios.get(`http://bbox:9091/`)
       .then(result => {
           res.send(`Bbox port 9091: Status ${result.status} Data ${result.data}`);
