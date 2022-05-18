@@ -33,4 +33,4 @@ scenarios:
   - name: Bbox-9091
     flow:
       - get:
-          url: '/bbox-9091'
+          url: '/async'
