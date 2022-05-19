@@ -27,4 +27,4 @@ scenarios:
   - name: Ping (/)
     flow:
       - get:
-          url: '/ping'
+          url: '/'
