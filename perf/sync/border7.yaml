@@ -8,16 +8,22 @@ config:
           port: 8125
           prefix: "artillery-node"
 
-  pool: 200 # All HTTP requests from all virtual users will be sent over the same connections
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
-    - name: Positive Ramp
-      duration: 600
-      arrivalRate: 1
-      rampTo: 1000
-    - name: Final
+    - name: Start
       duration: 5
       arrivalRate: 1
+    - name: Positive Ramp
+      duration: 10
+      arrivalRate: 1
+      rampTo: 5
+    - name: Sublimit
+      duration: 60
+      arrivalRate: 5
+    - name: Overlimit
+      duration: 120
+      arrivalRate: 7
 
 scenarios:
   - name: Bbox-9090

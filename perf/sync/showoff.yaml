@@ -1,0 +1,48 @@
+config:
+  environments:
+    node:
+      target: 'http://localhost:5555/node'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-node"
+
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+
+  # Pura y Exclusivamente para mostrar que las predicciones de la tabla funcionan. 
+  # Aumenta los requests por second continuamente y permite tiempos de recuperación 
+  # Tal que no termine de procesar todo antes de mandar mas requests, manteniendo siempre
+  # ocupado a bbox:9090. El cálculo es tan preciso, que lo poco que sobra de tiempo lleva 
+  # al response time a casi 10 (9.80 - 9.90).
+  phases:
+    - name: Start
+      duration: 5
+      arrivalRate: 1
+    - name: Positive Ramp
+      duration: 10
+      arrivalRate: 1
+      rampTo: 5
+    - name: Sublimit
+      duration: 10
+      arrivalRate: 5
+    - name: Overlimit 7R 9
+      duration: 15
+      arrivalRate: 7
+    - pause: 3
+    - name: Overlimit 7R 15
+      duration: 15
+      arrivalRate: 7
+    - pause: 5
+    - name: Overlimit 7R 22
+      duration: 20
+      arrivalRate: 7
+    - pause: 8
+    - name: Overlimit 7R 25
+    - duration: 25
+      arrivalRate: 7
+scenarios:
+  - name: Bbox-9090
+    flow:
+      - get:
+          url: '/sync'

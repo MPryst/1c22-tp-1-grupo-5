@@ -11,26 +11,28 @@ config:
   pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
-    - name: Start
-      duration: 5
-      arrivalRate: 1
-    - name: Positive Ramp
-      duration: 20
-      arrivalRate: 5
-      rampTo: 20
-    - name: Plain
-      duration: 60
-      arrivalRate: 20
-    - name: Negative Ramp
+
+    - name: start
       duration: 30
-      arrivalRate: 20
-      rampTo: 5
-    - name: Final
-      duration: 35
-      arrivalRate: 1
+      arrivalRate: 100
+    - name: Ramp 1
+      duration: 60
+      arrivalRate: 100
+      rampTo: 500
+    - name: Ramp 2
+      duration: 60
+      arrivalRate: 500
+      rampTo: 1000
+    - name: Ramp 3
+      duration: 45
+      arrivalRate: 1000
+      rampTo: 1500
+    - name: final
+      duration: 30
+      arrivalRate: 30
 
 scenarios:
-  - name: Bbox-9090
+  - name: Bbox-9091
     flow:
       - get:
-          url: '/sync'
+          url: '/async'
