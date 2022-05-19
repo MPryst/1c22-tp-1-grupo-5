@@ -1,0 +1,44 @@
+config:
+  environments:
+    node:
+      target: 'http://localhost:5555/node'
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-node"
+
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+
+  phases:       
+    - name: "1 request/s"
+      duration: 30
+      arrivalRate: 1          
+    
+    - name: "Ramp to 15"
+      duration: 60
+      arrivalRate: 1
+      rampTo: 15
+    
+    - name: "15 request/s"
+      duration: 60
+      arrivalRate: 15
+    
+    - name: "Ramp to 20"
+      duration: 60
+      arrivalRate: 15
+      rampTo: 20
+    
+    - name: "20 request/s"
+      duration: 60
+      arrivalRate: 20
+    
+    - name: "End"
+      duration: 30
+      arrivalRate: 1     
+
+scenarios:
+  - name: Primes
+    flow:
+      - get:
+          url: '/primes?n=30000'

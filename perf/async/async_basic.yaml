@@ -13,24 +13,24 @@ config:
   phases:
     - name: start
       duration: 30
-      arrivalRate: 5
+      arrivalRate: 1
     - name: Positive Ramp
       duration: 30
-      arrivalRate: 5
-      rampTo: 20
+      arrivalRate: 1
+      rampTo: 5
     - name: Plain
-      duration: 200
-      arrivalRate: 20
+      duration: 30
+      arrivalRate: 5
     - name: Negative Ramp
       duration: 30
-      arrivalRate: 20
-      rampTo: 5
+      arrivalRate: 1
+      rampTo: 1
     - name: final
       duration: 30
       arrivalRate: 5
 
 scenarios:
-  - name: Primes
+  - name: Bbox-9091
     flow:
       - get:
-          url: '/primes?n=30000'
+          url: '/async'

@@ -11,26 +11,27 @@ config:
   pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
 
   phases:
+
     - name: start
       duration: 30
-      arrivalRate: 5
-    - name: Positive Ramp
+      arrivalRate: 10
+    - name: Ramp 1
       duration: 30
-      arrivalRate: 5
-      rampTo: 20
-    - name: Plain
-      duration: 200
-      arrivalRate: 20
-    - name: Negative Ramp
+      arrivalRate: 10
+      rampTo: 30
+    - name: Plain 1
       duration: 30
-      arrivalRate: 20
-      rampTo: 5
+      arrivalRate: 30
+    - name: Ramp 2
+      duration: 60
+      arrivalRate: 30
+      rampTo: 50
     - name: final
       duration: 30
-      arrivalRate: 5
+      arrivalRate: 30
 
 scenarios:
-  - name: Primes
+  - name: Bbox-9091
     flow:
       - get:
-          url: '/primes?n=30000'
+          url: '/async'
